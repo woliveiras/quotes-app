@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { TouchableHighlight, View, Text, StyleSheet } from "react-native";
+import { TouchableHighlight, View, StyleSheet } from "react-native";
 
 import { Quote } from "./components/quote";
-
 import { quotes } from "./quotes";
+import { createIndex } from "./utils/createIndex";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +23,8 @@ export default function Index() {
   const quotesRef = quotes;
 
   const onPress = () => {
-    setIndex(Math.floor(Math.random() * quotesRef.length));
+    const newIndex = createIndex(index, quotesRef.length);
+    setIndex(newIndex);
   };
 
   return (

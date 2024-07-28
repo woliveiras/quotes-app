@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { TouchableHighlight, View, StyleSheet } from "react-native";
+import {
+  TouchableHighlight,
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+} from "react-native";
 
 import { Quote } from "./components/quote";
 import { quotes } from "./quotes";
@@ -8,13 +14,21 @@ import { createIndex } from "./utils/createIndex";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    padding: 32,
+    justifyContent: "center",
+    paddingLeft: 32,
+    paddingRight: 32,
+  },
+  content: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
   },
   title: {
-    flex: 1,
     textAlign: "center",
     fontSize: 24,
+    fontWeight: "bold",
+    textTransform: "uppercase",
   },
 } as const);
 
@@ -28,14 +42,18 @@ export default function Index() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollView}>
       <TouchableHighlight
         onPress={onPress}
         activeOpacity={1}
         underlayColor={"#f0f0f0"}
+        style={styles.container}
       >
-        <Quote text={quotes[index]} />
+        <View style={styles.content}>
+          <Text style={styles.title}>Brasil 🇧🇷</Text>
+          <Quote text={quotes[index]} />
+        </View>
       </TouchableHighlight>
-    </View>
+    </ScrollView>
   );
 }
